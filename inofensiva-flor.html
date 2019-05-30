@@ -1,0 +1,46 @@
+<canvas width="1000" height="1000"></canvas>
+
+<script>
+    let context = document.querySelector('canvas');
+    let pincel  = context.getContext('2d');
+
+    drawFlowerCicle(10, 10, 40);
+    drawFlowerCicle(100, 100, 40);
+    drawFlowerCicle(200, 200, 40);
+    drawFlowerCicle(300, 300, 40);
+    drawFlowerCicle(400, 400, 40);
+    drawFlowerCicle(500, 500, 40);
+    drawFlowerCicle(600, 600, 40);
+    drawFlowerCicle(700, 700, 40);
+    drawFlowerCicle(800, 800, 40);
+    drawFlowerCicle(900, 900, 40);
+    drawFlowerCicle(1000, 1000, 40);
+    
+    
+
+    function drawFlowerCicle(x, y, radius) {
+        if(radius >= 100) {
+            drawCicle(x, y - 100 - radius, radius, 'black');
+            drawCicle(x- 100 - radius, y, radius, 'black');
+            drawCicle(x, y, radius, 'yellow');
+            drawCicle(x + 100 + radius, y, radius, 'black');
+            drawCicle(x, y + 100 + radius, radius, 'black');
+        }
+
+        if(radius < 100) {
+            drawCicle(x, y - 100 + radius, radius, 'black');
+            drawCicle(x- 100 + radius, y, radius, 'black');
+            drawCicle(x, y, radius, 'yellow');
+            drawCicle(x + 100 - radius, y, radius, 'black');
+            drawCicle(x, y + 100 - radius, radius, 'black');
+        }
+    }
+    
+    
+    function drawCicle(x, y, radius, color) {
+        pincel.fillStyle = color;
+        pincel.beginPath();
+        pincel.arc(x, y, radius, 0, 2 * 3.14);
+        pincel.fill();
+    }
+</script>

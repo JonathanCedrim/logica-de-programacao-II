@@ -1,0 +1,24 @@
+<canvas width="2000" height="1000"></canvas>
+<script>
+    let context = document.querySelector('canvas');
+    let pincel  = context.getContext('2d');
+
+    
+    drawSquareWithStroke(10, 50, 50, 50, '#5bf22e', 5);
+    drawSquareWithStroke(262, 50, 50, 50, 'white', 3);
+
+    function drawSquareWithStroke(x, y, t, z, color, amount) {
+        let it = 0;
+        pincel.beginPath();
+            while(it < amount) {
+                pincel.strokeStyle = '#000000';
+                pincel.strokeRect(x, y, t + 1, z + 1);
+                pincel.fillStyle = color;
+                pincel.fillRect(x, y, t, z);
+                pincel.fill();
+
+                x += t;
+            it++;
+        }
+    }
+</script>
