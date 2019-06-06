@@ -1,0 +1,80 @@
+<canvas width="1000" height="600"></canvas>
+
+<script>
+let context = document.querySelector('canvas');
+let pincel = context.getContext('2d');
+
+let tamanho = 5;
+let color = 'green';
+
+pincel.beginPath();
+pincel.fillStyle = 'black';
+pincel.arc(50, 550, 30, 0, 2 * Math.PI);
+pincel.fill();
+pincel.beginPath();
+pincel.fillStyle = 'white';
+pincel.arc(150, 550, 30, 0, 2 * Math.PI);
+pincel.fill();
+pincel.beginPath();
+pincel.fillStyle = 'pink';
+pincel.arc(250, 550, 30, 0, 2 * Math.PI);
+pincel.fill();
+pincel.beginPath();
+pincel.fillStyle = 'red';
+pincel.arc(350, 550, 30, 0, 2 * Math.PI);
+pincel.fill();
+pincel.beginPath();
+pincel.fillStyle = 'blue';
+pincel.arc(450, 550, 30, 0, 2 * Math.PI);
+pincel.fill();
+pincel.beginPath();
+pincel.fillStyle = 'yellow';
+pincel.arc(550, 550, 30, 0, 2 * Math.PI);
+pincel.fill();
+
+
+context.style.backgroundColor = 'gray';
+
+
+
+function drawCicle(event) {
+    pincel.beginPath();
+    
+    if(event.pageX - context.offsetLeft > 25 && event.pageX - context.offsetLeft < 90 && event.pageY - context.offsetTop > 528 && event.pageY - context.offsetTop < 590) {
+        color = 'black';
+    }
+
+    if(event.pageX - context.offsetLeft > 125 && event.pageX - context.offsetLeft < 185 && event.pageY - context.offsetTop > 528 && event.pageY - context.offsetTop < 590) {
+        color = 'white';
+    }
+
+    pincel.fillStyle = color;
+    pincel.arc(event.pageX - context.offsetLeft, event.pageY - context.offsetTop, tamanho, 0, 2 * Math.PI);
+
+
+
+    
+    if( event.shiftKey ) {           
+        tamanho ++;        
+    }
+
+    if( event.ctrlKey ) {
+        if(tamanho > 0) {
+            tamanho--;                    
+        }
+    }
+    pincel.fill();
+}
+
+function click() {
+    context.onmousemove = drawCicle;    
+}
+
+function clickOff() {
+    context.onmousemove = null;
+}
+
+context.onclick = drawCicle;
+context.onmousedown = click;
+context.onmouseup = clickOff;
+</script>

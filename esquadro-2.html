@@ -1,0 +1,22 @@
+<canvas width="600" height="600"></canvas>
+
+<script>
+    
+
+    drawSquadro(50, 50, 400, 400, 'black');
+    drawSquadro(70, 100, 355, 375, 'white');
+
+
+    function drawSquadro(x, y, x1, y2, color) {
+        let context = document.querySelector('canvas');
+        let pincel = context.getContext('2d');
+
+        pincel.beginPath();
+        pincel.fillStyle = color;
+        pincel.moveTo(x, y);
+        pincel.lineTo(x, y2);
+        pincel.lineTo(x1, y2);
+
+        pincel.fill();
+    }
+</script>

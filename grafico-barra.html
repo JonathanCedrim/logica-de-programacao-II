@@ -1,0 +1,66 @@
+<canvas width="600" height="600"></canvas>
+
+<script>
+
+class Element {
+    constructor(titulo, color, size){
+        this.titulo = titulo;
+        this.color = color;
+        this.size = size;    
+    }
+}
+
+let elements = [];
+
+let element = new Element('jonathan', 'blue', 50);
+let elementI = new Element('Adriano', 'green',  10);
+let elementII = new Element('Adriano', 'yellow',  30);
+let elementV = new Element('Adriano', 'red',  10);
+
+elements.push(element);
+elements.push(elementI);
+elements.push(elementII);
+elements.push(elementV)
+
+desenhaBarra(100, 200, elements, 2016);
+desenhaBarra(200, 200, elements, 2017);
+desenhaBarra(300, 200, elements, 2018);
+desenhaBarra(400, 200, elements, 2019);
+desenhaBarra(500, 200, elements, 2020);
+desenhaBarra(600, 200, elements, 2021);
+
+function desenhaBarra(x, y, elements, year) {    
+    let sumSize = 0;
+    elements.forEach((elemento) => { sumSize += elemento.size });
+
+    if(sumSize <= 0 || sumSize > 100) { 
+        alert("Input element's size should be between 0 and 100");
+        return 0;
+    }
+    
+    let context = document.querySelector('canvas');
+    let pincel = context.getContext('2d');
+    let width = 50;
+
+    pincel.beginPath();
+
+
+    pincel.font = '22px Arial';
+    pincel.fillText(year, x, y - 10);    
+
+    elements.forEach((elemento) => {         
+        pincel.fillStyle = elemento.color;
+        pincel.fillRect(x, y, width, elemento.size);        
+        y += elemento.size;        
+    });
+
+
+    pincel.fill();
+
+    //posicionaBarra    
+    //capturaElemento
+    //pegaTamanho subtrai do 100
+    //desenhaRetangulo
+    //repeteOcicloMascomposiçãoiniciailydoproximoelementoacima
+}
+</script>
