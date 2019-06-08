@@ -1,0 +1,63 @@
+<canvas width="1000" height="1000"></canvas>
+
+<script>
+    let context = document.querySelector('canvas');
+    let pincel = context.getContext('2d');
+    let movimentY = 500;
+    let movimentX = 0;
+    let roofLimit = false;
+    let pulse = false;
+    let finishPulseBPM = false;
+
+    
+    function drawCircle (x, y, radius, color) {
+        pincel.beginPath();
+        pincel.fillStyle = color;
+        pincel.arc(x , y, radius, 0, 2 * Math.PI);
+        pincel.fill();
+    }
+
+    function screenClear() {
+        pincel.clearRect(0, 0, 1000, 1000);        
+    }
+
+    function draw() {
+        drawCircle(movimentX, movimentY, 10, 'green');
+        
+    }
+
+    function drawPulse() {
+        draw();
+        
+        
+        if(pulse) {
+            pulseBPM();            
+        }
+        readPulse();
+    }
+
+    function readPulse() {
+        if(movimentX >= 1000) {
+            screenClear();
+            movimentX = 0;
+        }
+        movimentX += 5;
+    }
+
+    function pulseBPM () {                
+        if(roofLimit == false && finishPulseBPM == false) {
+            movimentY -= 20;
+            if(movimentY >= 1000) {
+                roofLimit == true;
+                finishPulseBPM = true;
+            }
+            return;
+        }
+        movimentY += 20;
+    }
+
+
+
+    setInterval(drawPulse, 1);
+    
+</script>

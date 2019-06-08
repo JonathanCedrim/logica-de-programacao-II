@@ -1,0 +1,46 @@
+<canvas width="1000" height="1000"></canvas>
+
+<script>
+    let context = document.querySelector('canvas');
+    let pincel = context.getContext('2d');
+    let movimentX = 0;
+    let rightMoviment = true;
+
+    function drawCircle(x, y, raio, color) {
+        pincel.beginPath();
+        pincel.fillStyle = color;
+        pincel.arc(x, y, raio, 0, 2 * Math.PI);
+        pincel.fill();        
+    }
+
+    function screenClear() {
+        pincel.clearRect(0, 0, 1000, 1000);
+    }
+
+    function draw() {            
+            screenClear();
+            drawCircle(movimentX, 100, 50, 'black');            
+    }
+
+    
+    function rightAndLeft() {
+        draw();
+
+        if(movimentX <= 0) {
+            rightMoviment = true;
+        }
+        
+        if(movimentX >= 1000) {
+            rightMoviment = false;
+        }
+            
+        if(rightMoviment) {
+            movimentX++;
+            return;
+        }
+        movimentX--;
+    }
+
+    setInterval(rightAndLeft, 1);
+
+</script>

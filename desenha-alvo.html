@@ -1,0 +1,42 @@
+<canvas width="1000" height="1000"></canvas>
+
+<script>
+let context = document.querySelector('canvas');
+let pincel = context.getContext('2d');
+let paleta = ['white', 'red', 'white', 'red', 'white', 'red', 'yellow'];
+
+function drawTarget(x, y, event) {    
+    let it = 0;
+    let tamanho = 350;
+
+    while(it < paleta.length) {
+
+        
+        pincel.beginPath();
+        
+        pincel.fillStyle = paleta[it];
+
+        pincel.arc(x, y, tamanho, 0, 2 * Math.PI);
+        pincel.fill();
+        
+        tamanho -= 50;
+        it++;
+    }
+}
+
+drawTarget(500, 350);
+
+function target(event) {
+    console.log("X: " + event.pageX);
+    console.log("Y: " + event.pageY);
+
+    let x = event.pageX - context.offsetLeft;
+    let y = event.pageY - context.offsetTop;
+
+    if( x > 450 && x < 550 && y > 309 && y < 405) {
+        alert('Hit');
+    }
+}
+
+context.onclick = target;
+</script>
