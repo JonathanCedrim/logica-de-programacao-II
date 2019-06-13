@@ -40,9 +40,7 @@
     function hit(event) {
         let positionX = event.pageX - context.offsetLeft;
         let positionY = event.pageY - context.offsetTop;
-        console.log(" Position X: " + positionX + "Position Y: " + positionY );
-        console.log(" Target X: " + x + "Target Y: " + y );
-        
+                
         if( positionX >= x - 50 && positionX <= x + 50 && positionY >= y - 50 && positionY <= y + 50) {
             alert('Acertou !');
         }

@@ -1,0 +1,114 @@
+<canvas width="1000" height="1000"></canvas>
+
+<script>
+
+    let context = document.querySelector('canvas');
+    let pincel  = context.getContext('2d');
+    let colorCirclePincel = 'black';
+    let colorPalette = [];
+    let x, y = 0;
+    let circleSize = 10;
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+        return color;
+    }
+
+
+    function drawSquare(x, y, color, border = false) {
+        pincel.beginPath();
+        
+        if(border) {
+            pincel.strokeRect(x,y, 100, 100);        
+        }
+
+        pincel.fillStyle = color;
+        pincel.rect(x, y, 100, 100);
+        
+        pincel.fill();
+    }
+
+    function drawCircle(x, y, radius, color) {
+        pincel.beginPath();
+        pincel.fillStyle = color;
+
+        pincel.arc(x, y, radius, 0, 2 * Math.PI);
+
+        pincel.fill();
+    }
+
+    function screenClear() {
+        pincel.clearRect(context.width, context.height);
+    }
+
+    function draw(event) {
+        
+        
+        if(event.shiftKey) {
+            circleSize++;
+            return;
+        }
+        
+        if(event.ctrlKey) {
+            circleSize--;
+            return;
+        }
+
+        if(hit(event)){return ;}
+
+        x = event.pageX - context.offsetLeft;
+        y = event.pageY - context.offsetTop;
+
+        drawCircle(x, y, circleSize, colorCirclePincel);
+        
+    }
+
+    function drawPalette() {
+        let x = 50;
+        let it = 0;
+        
+        while(it < 5) {
+            colorPalette.push(getRandomColor());
+            drawSquare(x, 800, colorPalette[colorPalette.length -1], true);
+            x += 150;
+            it++;
+        }
+    }
+
+    function drawOn(event) {
+        document.onmousemove = draw;
+    }
+
+    function drawOff() {
+        document.onmousemove = null;
+    }
+
+    function hit(event) {
+        let x = event.pageX - context.offsetLeft;
+        let y = event.pageY - context.offsetTop;
+        let xPalette = 50;
+        let yPalette = 800;
+        let it = 0;
+        let hit = false;        
+        
+        while(it < 5) {
+            
+            if( x >= xPalette && x <= xPalette + 100 && y >= yPalette && y <= yPalette + 100) {
+                colorCirclePincel = colorPalette[it];
+                hit = true;                
+            }
+            it++;
+            xPalette += 150;
+        }
+        return hit;
+    } 
+
+    drawPalette();
+    
+    context.onmousedown = drawOn;
+    context.onmouseup = drawOff;
+</script>
