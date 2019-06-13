@@ -1,0 +1,54 @@
+<canvas width="1000" height="1000"></canvas>
+
+
+<script>
+    let context = document.querySelector('canvas');
+    let pincel = context.getContext('2d');
+    let y, x;
+
+    function drawCircle(x, y, radius, color) {    
+        pincel.beginPath();
+
+        pincel.fillStyle = color;
+        pincel.arc(x - context.offsetLeft, y - context.offsetTop, radius, 0, 2 * Math.PI);
+
+        pincel.fill();
+    }
+
+    function drawTarget() {
+        x = randomValue();
+        y = randomValue();
+               
+        drawCircle(x, y, 150, 'red');
+        drawCircle(x, y, 100, 'white');
+        drawCircle(x, y, 50, 'red');
+    }
+
+    function randomValue() {
+        return Math.round(Math.random() * 1000);
+    }
+
+    function screenClear() {        
+        pincel.clearRect(0, 0, context.width, context.height);
+    }
+
+    function draw(event) {        
+        screenClear();
+        drawTarget(event);
+    }
+
+    function hit(event) {
+        let positionX = event.pageX - context.offsetLeft;
+        let positionY = event.pageY - context.offsetTop;
+        console.log(" Position X: " + positionX + "Position Y: " + positionY );
+        console.log(" Target X: " + x + "Target Y: " + y );
+        
+        if( positionX >= x - 50 && positionX <= x + 50 && positionY >= y - 50 && positionY <= y + 50) {
+            alert('Acertou !');
+        }
+
+    }
+
+    context.onclick = hit;
+    setInterval(draw, 1000); 
+</script>
